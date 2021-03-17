@@ -6,7 +6,7 @@ body {
   
   textarea {
     background: transparent;
-    width: 50vw;
+    flex: 1 1 30%;
     border: none;
     resize: none;
     color: #000000;
@@ -30,6 +30,10 @@ body {
   .time-block {
     display: flex;
     border-radius: 15px;
+  }
+
+  .container {
+    display: block;
   }
   
   .row {
@@ -65,6 +69,8 @@ body {
   }
   
   .saveBtn {
+    flex: 1 0 auto;
+    max-width: 70px;
     background-size: cover;
     border-left: 1px solid gainsboro;
     border-top-right-radius: 15px;

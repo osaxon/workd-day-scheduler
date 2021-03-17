@@ -3,16 +3,25 @@ const currentTimeEl = $("#currentDay");
 
 let now = moment().format("ddd, MMM Do h:mm a")
 
-let dayStart = moment().hour(9);
-let dayEnd = moment().hour(17)
-let hoursInDay = dayEnd.diff(dayStart, 'hours');
 
+
+let startHour = 9
+let endHour = 17;
 // console.log(hoursInDay)
 // console.log(dayStart.format("h"))
 // console.log(dayEnd.format("h"))
 
 function setTimes() {
-    
+
+    let dayStart = moment().hour(startHour);
+    let dayEnd = moment().hour(endHour)
+    let hoursInDay = dayEnd.diff(dayStart, 'hours');
+    console.log(dayStart.format('h'));
+    for(i = 0; i < hoursInDay; i++){
+        dayStart.add(i,'h');
+        timeBlocksEl.children().eq(i).children().eq(0).text(dayStart.format('h'));
+        // console.log(dayStart.add(i,'h').format('h'));
+    }
 }
 
 function timer(){
@@ -28,6 +37,7 @@ function timer(){
 const timeLabels = ["9am","10am","11am","12am","1pm","2p,","3pm","4pm","5pm"];
 
 timer();
+setTimes()
 
 
 
