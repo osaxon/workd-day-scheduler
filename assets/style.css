@@ -6,12 +6,14 @@ body {
   
   textarea {
     background: transparent;
+    width: 50vw;
     border: none;
     resize: none;
     color: #000000;
     border-left: 1px solid black;
     padding: 10px;
   }
+
   
   .jumbotron {
     text-align: center;
@@ -26,17 +28,22 @@ body {
   }
   
   .time-block {
-    text-align: center;
+    display: flex;
     border-radius: 15px;
   }
   
   .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     white-space: pre-wrap;
     height: 80px;
     border-top: 1px solid white;
   }
   
   .hour {
+    flex: 0 0 45px;
+    text-align: right;
     background-color: #ffffff;
     color: #000000;
     border-top: 1px dashed #000000;
@@ -58,15 +65,21 @@ body {
   }
   
   .saveBtn {
-    border-left: 1px solid black;
+    background-size: cover;
+    border-left: 1px solid gainsboro;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: #06aed5;
     color: white;
+  }
+
+  i {
+    flex: 0 0 auto;
   }
   
   .saveBtn i:hover {
     font-size: 20px;
     transition: all 0.3s ease-in-out;
   }
+
   
