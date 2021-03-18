@@ -4,7 +4,7 @@ const saveBtn = $(".saveBtn");
 
 let now = moment().format("ddd, MMM Do h:mm a")
 
-let tasks = JSON.parse(localStorage.getItem("task")) || []; 
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 let startHour = 9
 let endHour = 17;
@@ -51,13 +51,27 @@ function timer(){
 function saveTask() {
     let thisHour = $(this).parent().attr("data-hour");
     let thisTask = $(this).parent().children().eq(1);
-    console.log(thisTask.val())
-    console.log(thisHour)
+    let taskObj = {
+        hour: thisHour,
+        task: thisTask.val()
+    }
+    tasks.push(taskObj)
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function renderTasks() {
+    let storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    console.log(storedTasks);
+    for (i = 0; i < storedTasks.length; i++){
+        let taskBox = timeBlocksEl.children().eq(i).children().eq(1);
+        taskBox.val(storedTasks[i].task);
+    }
 }
 
 timer();
 setTimes()
 checkTimes();
+renderTasks();
 
 timeBlocksEl.on("click","button", saveTask)
 
