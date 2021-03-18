@@ -24,23 +24,24 @@ function setTimes() {
 
 function checkTimes() {
     $(".time-block").each(function () {
+        $(this).removeClass("past", "present", "future");
         if($(this).attr("data-hour") < moment().format("H")){
-            console.log($(this).attr("data-hour"))
-            console.log(now)
             $(this).children().eq(1).addClass("past");
-        } else if ($(this).attr("data-hour") > now) {
+        } else if ($(this).attr("data-hour") > moment().format("H")){
             console.log("future")
+            $(this).children().eq(1).addClass("future");
+        } else if ($(this).attr("data-hour") == moment().format("H")){
+            $(this).children().eq(1).addClass("present")
+            console.log("present")
         }
     })
 }
 
 function timer(){
     currentTimeEl.text(now)
-    console.log(now)
     let timer = setInterval(function(){
         currentTimeEl.text(moment().format("ddd, MMM Do h:mm a"))
         now = moment().format("ddd, MMM Do h:mm a");
-        console.log(now)
     },1500);
     
 }
