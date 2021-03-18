@@ -25,16 +25,18 @@ function setTimes() {
 function checkTimes() {
     $(".time-block").each(function () {
         $(this).removeClass("past", "present", "future");
-        if($(this).attr("data-hour") < moment().format("H")){
-            $(this).children().eq(1).addClass("past");
-        } else if ($(this).attr("data-hour") > moment().format("H")){
-            console.log("future")
-            $(this).children().eq(1).addClass("future");
-        } else if ($(this).attr("data-hour") == moment().format("H")){
-            $(this).children().eq(1).addClass("present")
+        if(parseInt($(this).attr("data-hour")) < moment().format("H")){
+            console.log("past")
+            $(this).children().eq(1).addClass("past")
+        } else if (parseInt($(this).attr("data-hour")) > moment().format("H")){
+            console.log("future");
+            $(this).children().eq(1).addClass("future")
+        } else if (parseInt($(this).attr("data-hour")) == moment().format("H")){
             console.log("present")
+            $(this).children().eq(1).addClass("present")
         }
-    })
+    });
+    
 }
 
 function timer(){
