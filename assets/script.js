@@ -50,6 +50,8 @@ function timer(){
 
 function saveTask() {
     let thisHour = $(this).parent().attr("data-hour");
+    let thisTask = $(this).parent().children().eq(1);
+    console.log(thisTask.val())
     console.log(thisHour)
 }
 
