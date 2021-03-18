@@ -1,9 +1,10 @@
 const timeBlocksEl = $(".time-blocks");
 const currentTimeEl = $("#currentDay");
+const saveBtn = $(".saveBtn");
 
 let now = moment().format("ddd, MMM Do h:mm a")
 
-
+let tasks = JSON.parse(localStorage.getItem("task")) || []; 
 
 let startHour = 9
 let endHour = 17;
@@ -19,7 +20,6 @@ function setTimes() {
         $(this).attr("data-hour",hour.format('H'))
         hour.add(1,'h');
     })
-    checkTimes();
 }
 
 function checkTimes() {
@@ -44,13 +44,21 @@ function timer(){
     let timer = setInterval(function(){
         currentTimeEl.text(moment().format("ddd, MMM Do h:mm a"))
         now = moment().format("ddd, MMM Do h:mm a");
-    },1500);
+    },3000);
     
 }
 
+function saveTask() {
+    let thisHour = $(this).parent().attr("data-hour");
+    console.log(thisHour)
+}
 
 timer();
 setTimes()
+checkTimes();
+
+timeBlocksEl.on("click","button", saveTask)
+
 
 
 
