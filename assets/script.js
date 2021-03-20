@@ -26,13 +26,10 @@ function checkTimes() {
     $(".time-block").each(function () {
         $(this).removeClass("past", "present", "future");
         if(parseInt($(this).attr("data-hour")) < moment().format("H")){
-            console.log("past")
             $(this).children().eq(1).addClass("past")
         } else if (parseInt($(this).attr("data-hour")) > moment().format("H")){
-            console.log("future");
             $(this).children().eq(1).addClass("future")
         } else if (parseInt($(this).attr("data-hour")) == moment().format("H")){
-            console.log("present")
             $(this).children().eq(1).addClass("present")
         }
     });
@@ -51,10 +48,23 @@ function timer(){
 function saveTask() {
     let thisHour = $(this).parent().attr("data-hour");
     let thisTask = $(this).parent().children().eq(1);
-    console.log(tasks);
+    console.log(thisHour, thisTask.val())
+    for(var i = 0; i < tasks.length; i++) {
+        if (tasks[i].hour == thisHour){
+            tasks[i].task = thisTask.val();
+        }
+    }
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    renderTasks();
 }
 
 function renderTasks() {
+    tasks.sort((a, b) => (b.hour < a.hour) ? 1 : -1);
+    tasks.forEach(function (element) {
+        let taskHr = element.hour;
+        let taskTxt = element.task;
+        $("[data-hour=" + taskHr + "]").children().eq(1).val(taskTxt);
+    })
 }
 
 setUp();
