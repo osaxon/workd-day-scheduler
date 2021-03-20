@@ -51,30 +51,34 @@ function timer(){
 function saveTask() {
     let thisHour = $(this).parent().attr("data-hour");
     let thisTask = $(this).parent().children().eq(1);
-    let taskObj = {
-        hour: thisHour,
-        task: thisTask.val()
-    }
-    tasks.push(taskObj)
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    console.log(tasks);
 }
 
 function renderTasks() {
-    let storedTasks = JSON.parse(localStorage.getItem("tasks"));
-    console.log(storedTasks);
-    for (i = 0; i < storedTasks.length; i++){
-        let taskBox = timeBlocksEl.children().eq(i).children().eq(1);
-        taskBox.val(storedTasks[i].task);
-    }
 }
 
-timer();
-setTimes()
-checkTimes();
-renderTasks();
+setUp();
+
+function setUp(){
+    timer();
+    setTimes();
+    checkTimes();
+    renderTasks();
+    if(jQuery.isEmptyObject(tasks)) {
+        for(let i = startHour; i < endHour; i++){
+            let taskData = {
+                hour: i,
+                task: "",
+            }
+            tasks.push(taskData)
+        }
+    console.log(tasks)
+    localStorage.setItem("tasks",JSON.stringify(tasks));
+}
+}
+
 
 timeBlocksEl.on("click","button", saveTask)
-
 
 
 
@@ -86,3 +90,8 @@ timeBlocksEl.on("click","button", saveTask)
     // change class of time block
 
 
+// need an object array to store tasks and the data hour
+// saving a task should update the property in the object array for the corresponding hour
+// then it should save back to local storage
+// when the page loads, any tasks that have been saved should be rendered to the corresponding task area
+// there should be one task per hour
