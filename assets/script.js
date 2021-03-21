@@ -4,15 +4,15 @@ const saveBtn = $(".saveBtn");
 
 let now = moment().format("ddd, MMM Do h:mm a")
 
+// initialise an array if one doesn't exist already in local storage
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-let startHour = 9
-let endHour = 17;
-// console.log(hoursInDay)
-// console.log(dayStart.format("h"))
-// console.log(dayEnd.format("h"))
+
 
 function setTimes() {
+    // set the data attributes of each time block
+    let startHour = 9
+    let endHour = 17;
     let dayStart = moment().hour(startHour).startOf('hour');
     let hour = dayStart;
     $(".time-block").each(function () {
@@ -23,6 +23,7 @@ function setTimes() {
 }
 
 function checkTimes() {
+    // format time blocks dynamically based on the time
     $(".time-block").each(function () {
         $(this).removeClass("past", "present", "future");
         if(parseInt($(this).attr("data-hour")) < moment().format("H")){
@@ -37,6 +38,7 @@ function checkTimes() {
 }
 
 function timer(){
+    // timer updates every 3s
     currentTimeEl.text(now)
     let timer = setInterval(function(){
         currentTimeEl.text(moment().format("ddd, MMM Do h:mm a"))
@@ -59,21 +61,24 @@ function saveTask() {
 }
 
 function renderTasks() {
+    // sort the task array in ascending order by the hour property
     tasks.sort((a, b) => (b.hour < a.hour) ? 1 : -1);
     tasks.forEach(function (element) {
         let taskHr = element.hour;
         let taskTxt = element.task;
+        // update the activity area for each time block with the task stored in the array
         $("[data-hour=" + taskHr + "]").children().eq(1).val(taskTxt);
     })
 }
 
-setUp();
 
 function setUp(){
     timer();
     setTimes();
     checkTimes();
     renderTasks();
+    
+    // if there aren't any saved tasks in the array then create a new object and push to the tasks array
     if(jQuery.isEmptyObject(tasks)) {
         for(let i = startHour; i < endHour; i++){
             let taskData = {
@@ -82,11 +87,13 @@ function setUp(){
             }
             tasks.push(taskData)
         }
-    console.log(tasks)
+    
+    // save the array to local storage
     localStorage.setItem("tasks",JSON.stringify(tasks));
 }
 }
 
+setUp();
 
 timeBlocksEl.on("click","button", saveTask)
 
