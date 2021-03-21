@@ -4,7 +4,7 @@
 
 ## Link
 
-
+https://osaxon.github.io/workd-day-scheduler/ 
 
 ## Features
 
@@ -33,7 +33,7 @@ My first attempt resulted in multiple items with the same data-attribute hour va
 
 In the end I decided to set up the array of tasks with placeholder objects for each hour of the day. The save function then checks which data-attribute hour has been clicked and updates the text value of the corresponding object within the array. 
 
-To display the stored tasks in the correct blocks I realised I could build on a technique used in a a previous project (JavaScript Coding Quiz) and sort the array by the data-hour attribute and loop through each element to update the time blocks. 
+To display the stored tasks in the correct blocks I realised I could build on a technique used in a a previous project (https://github.com/osaxon/coding-quiz) and sort the array by the data-hour attribute and loop through each element to update the time blocks. 
 
 ## Final thoughts
 
