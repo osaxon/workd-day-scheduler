@@ -7,12 +7,13 @@ let now = moment().format("ddd, MMM Do h:mm a")
 // initialise an array if one doesn't exist already in local storage
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
+let startHour = 9
+let endHour = 17;
 
 
 function setTimes() {
     // set the data attributes of each time block
-    let startHour = 9
-    let endHour = 17;
+    
     let dayStart = moment().hour(startHour).startOf('hour');
     let hour = dayStart;
     $(".time-block").each(function () {
