@@ -81,7 +81,7 @@ function setUp(){
     
     // if there aren't any saved tasks in the array then create a new object and push to the tasks array
     if(jQuery.isEmptyObject(tasks)) {
-        for(let i = startHour; i < endHour; i++){
+        for(let i = 9; i < 17; i++){
             let taskData = {
                 hour: i,
                 task: "",
